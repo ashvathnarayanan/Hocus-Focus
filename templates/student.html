@@ -1,0 +1,70 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+      <meta charset="utf-8">
+        <title>Meeting | Microsoft Teams</title>
+        <link rel="stylesheet" href="{% static 'css/student.css'%}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static '/channels/js/websocketbridge.js' %}"></script>
+</head>
+<body class="bg bg1">
+  <section class="py-5  text-center">
+  <div class="container">
+    <div class="row">
+            <div class="col-lg-5">
+              <div class="content bg1" >
+              <h3 style="text-align:center;color:white;font-weight: bold;">Question 1</h3><br>
+              <p class="size">What did the teacher teach?</p>
+              <form action="" method="POST">
+                <div class="form-check">
+                  <input class="form-check-input size" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label size" for="flexRadioDefault1">Option1</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input size" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label size" for="flexRadioDefault1">Option2</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input size" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label size" for="flexRadioDefault1">Option3</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input size" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label size" for="flexRadioDefault1">Option4</label>
+                </div>
+              <br>
+              <input type="Submit" class="btn btn-outline-light" name="Submit" id="Submit" value="Submit">
+              </form>
+            </div>
+            </div>
+    </div>
+  </div>
+  </div>
+  </section>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+const webSocketBridge = new channels.WebSocketBridge();
+
+webSocketBridge.connect('/ws/');
+webSocketBridge.listen(function(action, stream) {
+var options="";
+for(var i=1;i<5;i++){
+  options+="<input id='"+i+"' type='radio' name='chosenoption' value='"+action.options[i-1]+"'><label for='"+i+"'>"+action.options[i-1]+"</label><br>";
+}
+options+="<input type='submit' value='Submit'>"
+document.getElementById('question').innerHTML+=options;
+document.getElementById('question').style.display='block';
+})
+document.ws = webSocketBridge; /* for debugging */
+})
+
+function submitted() {
+document.getElementById('question').style.display='none';
+}
+
+  </script>
+</body>
+</html>
