@@ -11,8 +11,8 @@ class StudentConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard("DistracNot", self.channel_name)
 
     async def send_options(self, event):
-        options=prototype.main()
-        await self.send_json({"options":options})
+        # options=prototype.main()
+        await self.send_json({"options":["ash","vath",'naray','anan']})
 
     async def stop_options(self, event):
         await self.send_json({"options":"opop"})

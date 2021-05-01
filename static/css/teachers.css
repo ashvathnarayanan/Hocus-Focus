@@ -4,7 +4,8 @@
 .bg{
 background-image: url("../images/teams.jpg");
  background-repeat: no-repeat;
- background-size:100% 1447%;
+ /* background-size:100% 1447%; */
+background-size: cover;
 }
 .bg1{
  background-color:black;
