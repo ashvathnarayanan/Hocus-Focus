@@ -7,11 +7,16 @@ def index(request):
 
 def student(request):
     if request.method=="POST":
-        return HttpResponse(request.POST["chosenoption"])
+        if request.POST["token"]==request.POST["chosenoption"]:
+            student=Student.objects.all()[0]
+            student.score+=1
+            student.save()
+            return HttpResponse(student.score)
     return render(request,'student.html')
 
 def startdn(request):
     trigger=Trigger(name=request.POST["course"])
+    trigger.lang=request.POST["lang"]
     trigger.save()
     return HttpResponse(request.POST["course"])
 

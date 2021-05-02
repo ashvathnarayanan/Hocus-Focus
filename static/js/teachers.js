@@ -8,7 +8,8 @@ function startdn(formdata) {
     type:"POST",
     url:"http://127.0.0.1:8000/start",
     data:  {
-        course: formdata['course'].value,
+      course: formdata['course'].value,
+      lang: formdata['lang'].value,
       },
     success: function(data){}
   });

@@ -1,5 +1,6 @@
 import asyncio
 from app import prototype
+from app.models import *
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 class StudentConsumer(AsyncJsonWebsocketConsumer):
@@ -11,8 +12,14 @@ class StudentConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard("DistracNot", self.channel_name)
 
     async def send_options(self, event):
-        # options=prototype.main()
-        await self.send_json({"options":["ash","vath",'naray','anan']})
-
-    async def stop_options(self, event):
-        await self.send_json({"options":"opop"})
+        q=0
+        while True:
+            try:
+                trigger=Trigger.objects.get(name=event["name"])
+                q+=1
+                options,token=prototype.speech_to_question(event["lang"])
+                await self.send_json({"type":"start","qno":str(q),"options":options,"token":token})
+                await asyncio.sleep(7)
+            except:
+                await self.send_json({"type":"stop"})
+                break

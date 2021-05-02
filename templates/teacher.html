@@ -21,6 +21,10 @@
             {%csrf_token%}
             <input type="hidden" name="course" value="AI">
             <input type="submit" id="start" value="Start" >
+            <select name="lang">
+              <option value="1">English</option>
+              <option value="2">Hindi</option>
+            </select>
           </form>
         </td>
         <td>
@@ -34,6 +38,6 @@
     </table>
     </div>
   </section>
-  <script src="{% static 'js/teacher.js' %}"></script>
+  <script src="{% static 'js/teachers.js' %}"></script>
 </body>
 </html>

@@ -9,10 +9,10 @@ def startFocus(sender, instance, created, **kwargs):
     if created:
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            "DistracNot", {"type"    : "send.options"})
+            "DistracNot", {"type"    : "send.options","name":instance.name,"lang":instance.lang})
 
-@receiver(pre_delete, sender=Trigger)
-def stopFocus(sender, instance, **kwargs):
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-    "DistracNot", {"type"    : "stop.options"})
+# @receiver(pre_delete, sender=Trigger)
+# def stopFocus(sender, instance, **kwargs):
+#     channel_layer = get_channel_layer()
+#     async_to_sync(channel_layer.group_send)(
+#     "DistracNot", {"type"    : "send.options","chk":"stop"})

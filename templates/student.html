@@ -14,9 +14,10 @@
   <section class="py-5  text-center">
   <div class="container">
         <div class="content bg1" >
-        <h3 style="text-align:center;color:white;font-weight: bold;">Question 1</h3><br>
-        <p class="size">What did the teacher teach?</p><br>
-        <form action="" method="POST">
+        <h3 id="question" style="text-align:center;color:white;font-weight: bold;">Question 1</h3><br>
+        <p class="size" id="what">What did the teacher teach?</p><br>
+        <form method="POST">
+          {%csrf_token%}
           <div class="row">
             <div class="col-lg-6">
                 <div class="form-check">
@@ -30,6 +31,7 @@
             </div>
             <div class="col-lg-6">
                   <div class="form-check">
+                    <input id="token" type="hidden" name="token">
                     <input class="form-check-input size" type="radio" name="chosenoption" id="flexRadioDefault2">
                     <label id="label2" class="form-check-label size" for="flexRadioDefault2">Option2</label>
                   </div><br>
@@ -40,34 +42,15 @@
             </div>
         </div>
         <br>
-        <input type="Submit" class="button" name="Submit" id="Submit" value="Submit">
+        <table>
+          <tr>
+            <td><h5>Score : </h5></td>
+            <td><h5 id="score">0</h5></td>
+          </tr>
+        </table>
       </form>
       </div>
     </div>
-  <script type="text/javascript">
-  $(".content").hide();
-  document.addEventListener('DOMContentLoaded', function() {
-    const webSocketBridge = new channels.WebSocketBridge();
-    webSocketBridge.connect('/ws/');
-    webSocketBridge.listen(function(action, stream) {
-      $(".content").slideToggle();
-      for(var i=0;i<4;i++){
-        $('#flexRadioDefault'+i).val(action.options[i]);
-        $('#label'+i).html(action.options[i]);
-      }
-      setTimeout(function (){
-        $(".content").slideToggle();
-      },5000);
-      // document.getElementById('question').innerHTML+=options;
-      // document.getElementById('question').style.display='block';
-    })
-    document.ws = webSocketBridge; /* for debugging */
-  })
-
-function submitted() {
-document.getElementById('question').style.display='none';
-}
-
-  </script>
-</body>
+    <script src="{%static 'js/students.js'%}"></script>
+  </body>
 </html>
