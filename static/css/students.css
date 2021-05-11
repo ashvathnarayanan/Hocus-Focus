@@ -8,13 +8,13 @@
 .bg{
 background-image: url("../images/teams.jpg");
  background-repeat: no-repeat;
- /* background-size:100% 204%; */
  background-size:cover;
 }
 .bg1{
  background-color:black;
 }
 .content {
+  display:none;
   position: relative;
   right: 130px;
   top:150px;
@@ -37,6 +37,4 @@ background-image: url("../images/teams.jpg");
   font-size: 13px;
   font-family: Segoe UI;
   font-weight:500;
-  /*position:relative;
-  top:60px;*/
 }

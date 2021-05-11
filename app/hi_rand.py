@@ -81,6 +81,4 @@ data = [
 	'फॉक्स फायर'
 ]
 
-def hindi_random():
-	x = random.randint(0, len(data))
-	return data[x]
+def hindi_random():return data[random.randint(0, len(data))]

@@ -3,3 +3,4 @@ from app.models import *
 
 admin.site.register(Trigger)
 admin.site.register(Student)
+admin.site.register(Question)

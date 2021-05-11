@@ -36,27 +36,30 @@ def word_filter(string):
     return string_filtered
 
 def quiz(string,num):
-    print(string)
     options=[]
-    if int(num) == 1:
-        options = RandomWords().get_random_words()[:3]
-    else:
-        for i in range(3):
-            options.append(hindi_random())
-    minimize = [words for words in string if len(words) > 5]
-    word=random.choice(minimize)
+    try:
+        if int(num) == 1:
+            options = RandomWords().get_random_words()[:3]
+        else:
+            for i in range(3):
+                options.append(hindi_random())
+        minimize = [words for words in string if len(words) > 5]
+        word=random.choice(minimize)
+    except:
+        return ("Are you listening to the class?",["No","Never","Nope","Yes"],"Yes")
     options.append(word)
     random.shuffle(options)
-    return (options,word)
+    return ("What did the teacher teach?",options,word)
 
 def speech_to_question(num):
+    print("Start")
     init_rec = SpeechRecog.Recognizer()
     words = []
     for i in range(1):
         with SpeechRecog.Microphone() as source:
             audio_data = init_rec.record(source, duration=5)
             try:text = init_rec.recognize_google(audio_data, language = lang[int(num)])
-            except:return (["No","Never","Nope","Yes"],"Yes")
+            except:return ("Are you listening to the class?",["No","Never","Nope","Yes"],"Yes")
         if int(num) == 1:
             text_filtered = word_filter(text)
         else:

@@ -13,7 +13,6 @@
 <body class="bg bg1">
   <section class="py-1  text-center">
   <div class="container" style="position:relative; right:300px; color:white;">
-    <span>DistracNot : </span>
     <table>
       <tr>
         <td>
@@ -32,6 +31,13 @@
             {%csrf_token%}
             <input type="hidden" name="course" value="AI">
             <input type="submit" id="stop" value="Stop" style="background-color:black" disabled>
+          </form>
+        </td>
+        <td>
+          <form method="post">
+            {%csrf_token%}
+            <input type="hidden" name="course" value="AI">
+            <input type="submit" value="Get Scores">
           </form>
         </td>
       </tr>
